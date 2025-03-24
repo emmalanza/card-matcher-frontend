@@ -1,1 +1,26 @@
+@import url(https://fonts.googleapis.com/css?family=Karla:200,300,regular,500,600,700,800,200italic,300italic,italic,500italic,600italic,700italic,800italic);
 @import "tailwindcss";
+
+
+
+@theme {
+    --font-karla: 'Karla', sans-serif;
+
+    --color-primary: #001d3d;
+    --color-secondary: #326bbb;    
+    --color-third: #ffcc05;
+    --color-accent: #dd1c1a;
+
+}
+
+/* reset default */
+@layer base {
+    * {
+        @apply m-0 p-0 box-border;
+    }
+
+
+    body {
+        @apply font-karla;
+    }
+}
