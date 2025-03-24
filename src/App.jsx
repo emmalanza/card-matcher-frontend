@@ -1,11 +1,13 @@
+
+import React from 'react'
+import AppRouter from '@routes/AppRouter';
+
+
 function App() {
- 
 
   return (
-    <>
-     <h1 className="text-red-700">Hello React + Tailwind </h1>
-    </>
+    <AppRouter/>
   )
 }
-
+  
 export default App;
