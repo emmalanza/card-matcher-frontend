@@ -10,7 +10,7 @@ const Hero = () => {
             style={{ backgroundImage: `url(${backgroundImage})` }}
         >
             <img src={heroImage}
-                className="w-2xl mt-10"
+                className="w-2xl"
                 alt="Cards from TCGP" />
             <div className='relative'>
                 <h1 className="text-lg md:text-2xl lg:text-3xl text-center font-bold italic text-primary">

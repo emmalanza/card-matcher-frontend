@@ -8,11 +8,10 @@ export default function Card({ card }) {
         src={`${card.imgUrl}/high.webp`}
         alt={card.name}
         effect="blur"
-        className="w-full object-cover shadow-lg rounded-md"
+        className="w-full object-cover shadow-lg rounded-lg"
       />
       <div className="p-4">
         <h2 className="text-lg text-primary font-semibold">{card.name}</h2>
-
       </div>
     </div>
   );
