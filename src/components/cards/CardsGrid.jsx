@@ -6,7 +6,7 @@ import SearchBar from "@components/filters/SearchBar";
 import Filter from "@components/filters/Filter";
 import { getCardsBySet } from "@services/cards/cardService";
 
-function CardsGrid() {
+function CardsGrid({setId}) {
   const [cards, setCards] = useState([]);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -30,7 +30,7 @@ function CardsGrid() {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const cardsData = await getCardsBySet('A1');
+        const cardsData = await getCardsBySet(setId);
         setCards(cardsData);
       } catch (err) {
         setError(err.message);
@@ -71,12 +71,12 @@ function CardsGrid() {
   return (
     <section
       className="flex flex-col items-center justify-center 
-    bg-cover bg-center min-h-screen bg-fixed pt-10"
+      bg-cover bg-center min-h-screen bg-fixed pt-36"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="w-full max-w-7xl p-4 
+      <div className="w-full max-w-7xl px-10 py-4
       flex flex-col justify-center items-center gap-2 md:gap-0 md:flex-row md:justify-between">
-        <h1 className="text-2xl text-primary font-bold italic mb-4">Genes Formidables</h1>
+        <h1 className="text-3xl text-primary font-bold italic">Genes Formidables</h1>
         <div className="flex flex-col sm:flex-row items-center gap-2">
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder={"Buscar carta por nombre"} />
           <Filter filter={filter} setFilter={setFilter} options={rarity} />
