@@ -1,10 +1,12 @@
-import Logo from "@assets/img/logo.webp"
+import React, { useEffect, useState } from "react";
+import Logo from "@assets/img/logo.webp";
 import LinkButton from "@components/ui/buttons/LinkButton";
 import { Link } from "react-router-dom";
-import { useEffect, useState } from "react";
+
 const Header = () => {
     const [isSticky, setIsSticky] = useState(false);
     const [lastScrollY, setLastScrollY] = useState(0);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -23,37 +25,63 @@ const Header = () => {
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [lastScrollY]);
+
+    const toggleMenu = () => {
+        setIsMenuOpen(!isMenuOpen);
+    };
 
     return (
-
-        <header className={`${isSticky ? "fixed top-0" : 
-        "absolute top-0"}
-        absolute top-0 z-1 w-full px-10 py-6
-        flex items-center justify-between`}>
+        <header
+            className={`${isSticky ? "fixed top-0" : "absolute top-0"} 
+            z-1 w-full px-10 py-6 backdrop-blur-none flex items-center justify-between`}
+        >
+    
             <Link to="/">
-                <img src={Logo} alt="logo" className="w-20  hover:scale-110 transition transform" />
+                <img src={Logo} alt="logo" className="w-28 hover:scale-110 transition transform" />
             </Link>
-            <nav>
-                <ul className="flex items-center justify-center gap-4">
-                    <li><a href="#sets" className="hover:underline">Expansiones</a></li>
+
+            <div className="z-10 md:hidden">
+                <button
+                    onClick={toggleMenu}
+                    className="text-primary text-4xl focus:outline-none"
+                >
+                    {isMenuOpen ? "✕" : "☰"}
+                </button>
+            </div>
+
+            <nav
+                className={`${isMenuOpen ? "block" : "hidden"}  
+                    fixed md:contents inset-0 h-screen md:h-auto 
+                    bg-white/50 backdrop-blur-lg md:backdrop-blur-none md:bg-transparent`}
+            >
+                <ul className="flex flex-col md:flex-row 
+                md:items-center md:justify-center gap-10 md:gap-4 p-10 md:p-4 text-2xl md:text-sm mt-20 md:mt-0">
                     <li>
-                        <LinkButton to="login"
-                            className="bg-white border border-primary rounded text-primary text-xs">
+                        <a href="#sets" className="hover:underline">
+                            Expansiones
+                        </a>
+                    </li>
+                    <li>
+                        <LinkButton
+                            to="login"
+                            className="bg-white border border-primary rounded text-primary"
+                        >
                             Inicio de sesión
                         </LinkButton>
                     </li>
                     <li>
-                        <LinkButton to="register"
-                            className="bg-primary border border-white rounded text-white text-xs">
+                        <LinkButton
+                            to="register"
+                            className="bg-primary border border-white rounded text-white"
+                        >
                             Registro
                         </LinkButton>
                     </li>
                 </ul>
             </nav>
-
         </header>
+    );
+};
 
-    )
-}
 export default Header;

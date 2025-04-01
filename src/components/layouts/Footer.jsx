@@ -10,21 +10,22 @@ const Footer = () => {
 
         <footer className="bg-primary text-white px-10 py-6">
 
-            <div className="flex justify-between items-center text-md lg:text-lg 
+            <div className="flex flex-col md:flex-row justify-between items-center text-md lg:text-lg 
             border-b-2 border-white max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
-                <div className="flex flex-col w-1/2">
+                <div className="flex flex-col w-full md:w-1/2">
                     <img src={Logo} alt="Logo" className="w-32 mb-10" />
                     <p>Sitio web creado por fans.</p>
                     <p>Esto <strong>NO</strong> es un sitio web oficial de Nintendo.</p>
                     <p>Pokémon TCG Pocket es desarrollado por:</p>
-                    <p>©2024 Pokémon. ©1995–2024 Nintendo / Creatures Inc. / GAME FREAK Inc.</p>
+                    <p>©2024 Pokémon.</p>
+                    <p>©1995–2024 Nintendo / Creatures Inc. / GAME FREAK Inc.</p>
                     <p>©2024 DeNA Co., Ltd.</p>
                     <p>TM, ® Nintendo.</p>
                 </div>
                 <img src={Eevee} alt="Eevee" className="w-1/2" />
             </div>
 
-            <div className="relative grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-4
+            <div className="relative grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4
             gap-6 justify-items-center items-center py-10
             border-b-2 border-white max-w-2xl lg:max-w-4xl xl:max-w-6xl 2xl:max-w-7xl mx-auto">
                 <div className="flex flex-col gap-2 justify-center items-center h-24">
@@ -45,7 +46,7 @@ const Footer = () => {
                     <p className="text-center">YT OFICIAL DE NINTENDO</p>
                     <a className="text-center"><img src={YTLogo} alt="Youtube Logo" className="w-10 h-10" /></a>
                 </div>
-                <div className="absolute right-0 -bottom-[-24px] md:-bottom-[-42px] xl:-bottom-[40px]
+                <div className="absolute right-0 bottom-[-0.5px] xl:-bottom-[40px]
                 bg-white
                 flex justify-evenly items-center px-2 md:px-4">
                     <a className="text-center"><img src={LinkedinLogo} alt="LinkedIn Logo" className="w-4 md:w-6 h-4 md:h-6" /></a>

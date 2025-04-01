@@ -37,7 +37,7 @@ const SetsGrid = () => {
       className="flex flex-col items-center justify-center bg-cover bg-right lg:bg-center min-h-screen bg-fixed lg:p-10"
       style={{ backgroundImage: `url(${backgroundImage})` }}
     >
-      <div className="md:self-start grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 max-w-4xl">
+      <div className="md:self-start 2xl:self-center grid grid-cols-1 sm:grid-cols-2 gap-6 p-6 max-w-4xl 2xl:max-w-6xl">
         {sets.map((set) => (
           <Link
             to={`/sets?setId=${set.id}`}
