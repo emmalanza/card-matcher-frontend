@@ -4,9 +4,11 @@ import Sets from "@pages/cards/Sets";
 // import Register from "@pages/users/Register";
 // import Login from "@pages/users/Login";
 import MainLayout from "@layouts/MainLayout";
+import ScrollToTop from "@routes/ScrollToTop";
 
 const AppRouter = () => (
     <Router>
+        <ScrollToTop/>
         <Routes>
             <Route element={<MainLayout />}>
                 <Route path="/" element={<Home />} />
