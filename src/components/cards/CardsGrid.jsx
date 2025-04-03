@@ -4,7 +4,7 @@ import Card from "@components/cards/Card";
 import backgroundImage from '@assets/img/bg-cards.webp';
 import SearchBar from "@components/filters/SearchBar";
 import Filter from "@components/filters/Filter";
-import { getCardsBySet } from "@services/cards/cardService";
+import { getCardsBySetId } from "@services/cards/cardService";
 
 function CardsGrid({setId}) {
   const [cards, setCards] = useState([]);
@@ -22,6 +22,8 @@ function CardsGrid({setId}) {
     "STAR_1",
     "STAR_2",
     "STAR_3",
+    "SHINY_1",
+    "SHINY_2",
     "CROWN",
     "PROMO"
   ];
@@ -30,7 +32,7 @@ function CardsGrid({setId}) {
   useEffect(() => {
     const getCards = async () => {
       try {
-        const cardsData = await getCardsBySet(setId);
+        const cardsData = await getCardsBySetId(setId);
         setCards(cardsData);
       } catch (err) {
         setError(err.message);
