@@ -46,7 +46,7 @@ const Footer = () => {
                     <p className="text-center">YT OFICIAL DE NINTENDO</p>
                     <a className="text-center"><img src={YTLogo} alt="Youtube Logo" className="w-10 h-10" /></a>
                 </div>
-                <div className="absolute right-0 bottom-[-0.5px] xl:-bottom-[40px]
+                <div className="absolute right-0 bottom-[-0.5px] lg:-bottom-[40px]
                 bg-white
                 flex justify-evenly items-center px-2 md:px-4">
                     <a className="text-center"><img src={LinkedinLogo} alt="LinkedIn Logo" className="w-4 md:w-6 h-4 md:h-6" /></a>
