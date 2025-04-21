@@ -1,11 +1,15 @@
-import React from 'react';
+import { useState } from 'react';
+import { useAuth } from "@contexts/AuthContext";
 import { loginUser } from "@services/auth/authService";
 import { usernameRegex, passwordRegex } from '@utils/regex';
 import { useNavigate } from "react-router-dom";
 import Form from '@components/ui/forms/Form';
 
 const LoginForm = () => {
+  const { login } = useAuth();
   const navigate = useNavigate();
+  const [error, setError] = useState(null);
+
 
   const fields = [
     {
@@ -29,15 +33,21 @@ const LoginForm = () => {
   ];
 
   const handleLogin = async (data) => {
-    try {
-      console.log("iniciando sesión....")
-      const result = await loginUser(data);
-      console.log("result", result);
-      navigate('/');
-    } catch (error) {
-      console.error("Error al registrar", error.message);
 
+    setError(null);
+
+    try {
+      const result = await loginUser(data);
+      if (result.error) {
+        setError(result.error);  
+      } else {
+        login(result.token);  
+        navigate('/');
+      }
+    } catch (error) {
+      setError("Hubo un problema al intentar iniciar sesión. Por favor, inténtalo más tarde.");
     }
+
   };
 
   return (
@@ -46,6 +56,13 @@ const LoginForm = () => {
       <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-primary font-bold italic my-6 text-center w-full">
         ¡Hola de nuevo!
       </h2>
+      
+      {error && (
+        <div className="text-accent text-sm md:text-md mb-4">
+          <p>{error}</p>
+        </div>
+      )}
+
       <Form fields={fields} onSubmit={handleLogin} submitButtonText="Iniciar sesión" />
 
       <p className="mt-6 text-primary text-sm sm:text-base">

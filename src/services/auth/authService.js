@@ -20,12 +20,8 @@ export async function registerUser (data) {
         return response.data;
 
     } catch (error) {
-        if (error.response) {
-            throw new Error(error.response.data.message || "Hubo un problema al registrar el usuario.");
-        } else if (error.request) {
-            throw new Error("No se recibió respuesta del servidor. Inténtalo de nuevo.");
-        } else {
-            throw new Error("Hubo un problema al configurar la solicitud. Inténtalo de nuevo.");
+        if (error.response && error.response.status === 400) {
+            return "Error al intentar registrar el usuario. Por favor, inténtalo más tarde.";
         }
     }
 
@@ -39,16 +35,21 @@ export async function loginUser (data) {
            'Content-Type': 'application/json',
          },
        });
-       
-       localStorage.setItem('token', response.data.token);
-       console.log(localStorage.getItem("token"));
- 
+
+       return response.data;
+
      } catch (error) {
-       if (error.response && error.response.status === 401) {
-         console.log('Usuario o contraseña incorrectos.');
-       } else {
-         console.log('Error al intentar iniciar sesión. Por favor, inténtalo más tarde.');
-       }
-     }
+      if (error.response) {
+        if (error.response.status === 401) {
+          return { error: 'Usuario o contraseña incorrectos.' };
+        } else if (error.response.status === 500) {
+          return { error: 'Error al intentar iniciar sesión. Por favor, inténtalo más tarde.' };
+        } else {
+          return { error: 'Algo salió mal. Por favor, inténtalo nuevamente.' };
+        }
+      } else {
+        return { error: 'No se pudo conectar con el servidor. Verifica tu conexión a Internet.' };
+      }
+    }
 
 }
