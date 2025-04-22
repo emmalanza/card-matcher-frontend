@@ -24,6 +24,7 @@ const AppRouter = () => (
                         </ProtectedRoute>
                     }
                 />
+
             </Route>
             <Route element={<SimpleLayout />}>
                 <Route path="/register" element={<Register />} />

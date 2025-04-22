@@ -1,10 +1,8 @@
 import React from 'react';
 import backgroundImage from '@assets/img/bg-cards.webp';
-import { useAuth } from '@contexts/AuthContext';
 import { Mail, AtSign, Handshake } from 'lucide-react';
 
-const ProfileInfo = () => {
-    const { user } = useAuth();
+const ProfileInfo = ({user}) => {
 
     if (!user) {
         return <p className="text-center mt-20 text-gray-500">Cargando perfil...</p>;
@@ -49,6 +47,7 @@ const ProfileInfo = () => {
                     </div>
                 </div>
             </div>
+
         </section>
     );
 };
