@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { addCardToList, removeCardFromList } from '@services/cardLists/cardListService';
-import TradableCardGrid from '@components/cards/TradableCardGrid';
+import TradableCardsGrid from '@components/cards/TradableCardsGrid';
 
 const UserLists = ({ lists }) => {
     const [selectedListId, setSelectedListId] = useState(null);
@@ -52,30 +52,26 @@ const UserLists = ({ lists }) => {
                             >
                                 {selectedListId === list.id ? 'Ocultar detalles' : 'Más detalles'}
                             </button>
-                            <button
-                                onClick={handleAddCard}
-                                disabled={selectedListId === null}
-                                className={`px-4 py-2 rounded ${
-                                    selectedListId === null
-                                        ? 'bg-gray-400 cursor-not-allowed'
-                                        : 'bg-green-500 hover:bg-green-600'
-                                } text-white transition`}
-                            >
-                                Añadir carta
-                            </button>
+
+                            {selectedListId && (
+                                <button
+                                    onClick={handleAddCard}
+                                    className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600 transition"
+                                >
+                                    {showTradableCardGrid ? 'Ocultar cartas' : 'Añadir carta'}
+                                </button>
+                            )}
+
                         </div>
 
                         {/* Mostrar detalles si esta lista está seleccionada */}
                         {selectedListId === list.id && (
                             <div className="mt-6">
                                 <h4 className="text-lg font-bold text-gray-800">Cartas en esta lista:</h4>
-                                <ul className="mt-4 space-y-2">
+                                <ul className="mt-4 grid grid-cols-2 md:grid-cols-3 gap-4">
                                     {list.cards.map((card) => (
-                                        <li
-                                            key={card.id}
-                                            className="flex justify-between items-center bg-gray-100 p-2 rounded"
-                                        >
-                                            <span className="text-gray-700">{card.name}</span>
+                                        <li key={card.id} className="bg-gray-100 p-3 rounded-lg shadow flex justify-between items-center">
+                                            <span className="text-gray-800 font-medium">{card.name}</span>
                                             <button
                                                 onClick={() => handleAddOrRemoveCard(card.id, true)}
                                                 className="text-red-500 hover:text-red-700 font-semibold"
@@ -91,9 +87,9 @@ const UserLists = ({ lists }) => {
                 ))}
 
                 {/* Mostrar grid de cartas intercambiables */}
-                {showTradableCardGrid && selectedListId && (
+                {showTradableCardsGrid && selectedListId && (
                     <div className="mt-6">
-                        <TradableCardGrid
+                        <TradableCardsGrid
                             onAddOrRemoveCard={handleAddOrRemoveCard}
                             currentCards={lists.find((list) => list.id === selectedListId)?.cards || []}
                         />
