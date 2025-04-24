@@ -68,34 +68,43 @@ const TradableCardsGrid = ({ onAddOrRemoveCard, currentCards }) => {
 
     return (
         <section>
-
             <div className="w-full max-w-7xl px-10 py-4
-      flex flex-col justify-center items-center gap-2 md:gap-0 md:flex-row md:justify-between">
+            flex flex-col justify-center items-center gap-2 md:gap-0 md:flex-row md:justify-between">
                 <h1 className="text-3xl text-primary font-bold italic">Genes Formidables</h1>
                 <div className="flex flex-col sm:flex-row items-center gap-2">
                     <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder={"Buscar carta por nombre"} />
                     <Filter filter={filter} setFilter={setFilter} options={rarity} />
                 </div>
             </div>
+
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-4">
                 {filteredCards.map((card) => {
                     const alreadyInList = isCardInList(card.id);
                     return (
-                        <div key={card.id}>
+                        <div
+                            key={card.id}
+                            className="relative group w-full flex justify-center items-center"
+                        >
+           
                             <Card card={card} />
-                            <button
-                                onClick={() => onAddOrRemoveCard(card.id, alreadyInList)}
-                                className={`mt-4 px-4 py-2 rounded text-white font-semibold transition ${alreadyInList ? 'bg-red-500 hover:bg-red-600' : 'bg-blue-500 hover:bg-blue-600'
+
+                    
+                            <div className="absolute inset-0 backdrop-blur-xs opacity-0 group-hover:opacity-100 transition-all duration-300 flex justify-center items-center rounded-lg">
+                                <button
+                                    onClick={() => onAddOrRemoveCard(card.id, alreadyInList)}
+                                    className={`px-6 py-2 rounded-lg text-white font-bold shadow-lg transition-all duration-300 transform 
+                                    hover:scale-105 ${alreadyInList ? 'bg-accent' : 'bg-green-400'
                                     }`}
-                            >
-                                {alreadyInList ? 'Eliminar' : 'Añadir'}
-                            </button>
+                                >
+                                    {alreadyInList ? 'Eliminar' : 'Añadir'}
+                                </button>
+                            </div>
                         </div>
                     );
                 })}
             </div>
-        </section>
 
+        </section>
     );
 };
 
