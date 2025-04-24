@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { addCardToList, removeCardFromList } from '@services/cardLists/cardListService';
+import { addCardToList, removeCardFromList, getUserCardLists } from '@services/cardLists/cardListService';
 import TradableCardsGrid from '@components/cards/TradableCardsGrid';
 
 const CardsLists = ({ lists }) => {
@@ -22,29 +22,28 @@ const CardsLists = ({ lists }) => {
         setShowGrid(prev => !prev);
     };
 
+    const refreshListsFromBackend = async () => {
+        const token = localStorage.getItem('token');
+        try {
+            const data = await getUserCardLists(token);
+            setUpdatedLists(data);
+        } catch (error) {
+            console.error('Error recargando listas:', error);
+            alert('Hubo un error al actualizar la lista desde el servidor');
+        }
+    };
+
     const handleAddOrRemoveCard = async (cardId, isAdded) => {
         const token = localStorage.getItem('token');
         try {
-            let newLists = [...updatedLists];
-
             if (isAdded) {
                 await removeCardFromList(selectedListId, cardId, token);
-                newLists = newLists.map(list =>
-                    list.id === selectedListId
-                        ? { ...list, cards: list.cards.filter(card => card.id !== cardId) }
-                        : list
-                );
             } else {
                 await addCardToList(selectedListId, cardId, token);
-                const card = { id: cardId, name: `Carta ${cardId}` }; 
-                newLists = newLists.map(list =>
-                    list.id === selectedListId
-                        ? { ...list, cards: [...list.cards, card] }
-                        : list
-                );
             }
 
-            setUpdatedLists(newLists);
+            await refreshListsFromBackend();
+
         } catch (error) {
             console.error('Error actualizando carta:', error);
             alert('Hubo un error al actualizar la carta');
@@ -53,11 +52,9 @@ const CardsLists = ({ lists }) => {
 
     return (
         <div className="p-4 md:p-8 min-w-full text-primary">
-
             <h2 className="text-2xl md:text-3xl font-bold mb-6">Tus Listas</h2>
 
             <div className="space-y-6">
-
                 {updatedLists.map(list => (
                     <div key={list.id} className="bg-white p-4 md:p-6 shadow-md rounded-lg relative">
 
