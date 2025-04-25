@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "@contexts/AuthContext";
 import LinkButton from "@components/ui/buttons/LinkButton";
+import { LogOut } from 'lucide-react';
 import Logo from "@assets/img/logo.webp";
 
 const Header = () => {
@@ -59,7 +60,7 @@ const Header = () => {
                 <ul className="flex flex-col md:flex-row 
                 md:items-center md:justify-center gap-10 md:gap-4 p-10 md:p-4 text-2xl md:text-sm mt-20 md:mt-0">
                     <li>
-                        <a href="#sets" className="hover:underline">
+                        <a href="/#sets" className="hover:underline">
                             Expansiones
                         </a>
                     </li>
@@ -85,16 +86,27 @@ const Header = () => {
                     ) : (
                         <>
                             <li>
-                                <Link to="profile" >
+                                <Link to="profile" className="hover:underline">
                                     Perfil
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="profile" className="hover:underline">
+                                    Mi Colección
+                                </Link>
+                            </li>
+                            <li>
+                                <Link to="profile" className="hover:underline">
+                                    Haz Match!
                                 </Link>
                             </li>
                             <li>
                                 <button
                                     onClick={logout}
-                                    className="p-2 bg-accent border border-white rounded-md text-white"
+                                    className="p-2 bg-accent border border-white rounded-md text-white
+                                    hover:scale-110 transition transform"
                                 >
-                                    Cerrar sesión
+                                     <LogOut size={18} /> 
                                 </button>
                             </li>
                         </>

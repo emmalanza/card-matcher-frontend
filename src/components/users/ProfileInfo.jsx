@@ -1,20 +1,14 @@
 import React from 'react';
-import backgroundImage from '@assets/img/bg-cards.webp';
-import { useAuth } from '@contexts/AuthContext';
 import { Mail, AtSign, Handshake } from 'lucide-react';
 
-const ProfileInfo = () => {
-    const { user } = useAuth();
+const ProfileInfo = ({ user }) => {
 
     if (!user) {
         return <p className="text-center mt-20 text-gray-500">Cargando perfil...</p>;
     }
 
     return (
-        <section
-            className="flex flex-col items-center justify-center bg-cover bg-center min-h-screen"
-            style={{ backgroundImage: `url(${backgroundImage})` }}
-        >
+        <>
             <div className="w-full max-w-lg mx-auto p-4 bg-white shadow-xl rounded-2xl mt-20 sm:p-6 md:p-8">
                 <div className="flex flex-col items-center space-y-4 text-center">
                     <img
@@ -49,7 +43,7 @@ const ProfileInfo = () => {
                     </div>
                 </div>
             </div>
-        </section>
+        </>
     );
 };
 
