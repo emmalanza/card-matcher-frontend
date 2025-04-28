@@ -7,7 +7,7 @@ export async function getCardsBySetId(setId) {
       const response = await axios.get(`${API_URL}/set`, {
         params: { setId }, 
       });
-      return response.data; 
+      return response.data.data; 
     } catch (error) {
       console.error("Error fetching cards:", error);
       throw error; 
@@ -16,6 +16,6 @@ export async function getCardsBySetId(setId) {
 
 export const getTradableCards = async () => {
   const response = await axios.get(`${API_URL}/tradable`);
-  return response.data;
+  return response.data.data;
 };
 

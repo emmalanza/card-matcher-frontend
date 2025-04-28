@@ -14,14 +14,15 @@ const Header = () => {
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
-
-            if (currentScrollY > 20 && currentScrollY > lastScrollY) {
-                setIsSticky(true);
-            } else if (currentScrollY < lastScrollY) {
-                setIsSticky(false);
+            // Solo cambiar el estado de sticky si no estamos en la vista móvil
+            if (window.innerWidth > 768) {  // Evitar que el scroll afecte en dispositivos móviles
+                if (currentScrollY > 20 && currentScrollY > lastScrollY) {
+                    setIsSticky(true);
+                } else if (currentScrollY < lastScrollY) {
+                    setIsSticky(false);
+                }
+                setLastScrollY(currentScrollY);
             }
-
-            setLastScrollY(currentScrollY);
         };
 
         window.addEventListener("scroll", handleScroll);
@@ -34,10 +35,15 @@ const Header = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
+    const closeMenu = () => {
+        setIsMenuOpen(false); 
+    };
+
     return (
         <header
-            className={`${isSticky ? "fixed top-0" : "absolute top-0"} 
-            z-1 w-full px-10 py-6 backdrop-blur-none flex items-center justify-between`}
+            className={`${isSticky ? "fixed top-0 backdrop-blur-md" : "absolute top-0 backdrop-blur-none"} 
+            z-10 w-full px-10 py-6 transition-all ease-in-out duration-300
+            flex items-center justify-between`}
         >
             <Link to="/">
                 <img src={Logo} alt="logo" className="w-28 hover:scale-110 transition transform" />
@@ -60,7 +66,7 @@ const Header = () => {
                 <ul className="flex flex-col md:flex-row 
                 md:items-center md:justify-center gap-10 md:gap-4 p-10 md:p-4 text-2xl md:text-sm mt-20 md:mt-0">
                     <li>
-                        <a href="/#sets" className="hover:underline">
+                        <a href="/#sets" className="hover:underline" onClick={closeMenu}>
                             Expansiones
                         </a>
                     </li>
@@ -70,6 +76,7 @@ const Header = () => {
                                 <LinkButton
                                     to="login"
                                     className="bg-white border border-primary rounded text-primary"
+                                    onClick={closeMenu}  
                                 >
                                     Inicio de sesión
                                 </LinkButton>
@@ -78,6 +85,7 @@ const Header = () => {
                                 <LinkButton
                                     to="register"
                                     className="bg-primary border border-white rounded text-white"
+                                    onClick={closeMenu}  
                                 >
                                     Registro
                                 </LinkButton>
@@ -86,27 +94,30 @@ const Header = () => {
                     ) : (
                         <>
                             <li>
-                                <Link to="profile" className="hover:underline">
+                                <Link to="profile" className="hover:underline" onClick={closeMenu}>
                                     Perfil
                                 </Link>
                             </li>
                             <li>
-                                <Link to="profile" className="hover:underline">
+                                <Link className="opacity-50 pointer-events-none" onClick={closeMenu}>
                                     Mi Colección
                                 </Link>
                             </li>
                             <li>
-                                <Link to="profile" className="hover:underline">
+                                <Link to="profile" className="opacity-50 pointer-events-none" onClick={closeMenu}>
                                     Haz Match!
                                 </Link>
                             </li>
                             <li>
                                 <button
-                                    onClick={logout}
+                                    onClick={() => {
+                                        logout();
+                                        closeMenu(); 
+                                    }}
                                     className="p-2 bg-accent border border-white rounded-md text-white
                                     hover:scale-110 transition transform"
                                 >
-                                     <LogOut size={18} /> 
+                                    <LogOut size={18} /> 
                                 </button>
                             </li>
                         </>
@@ -118,3 +129,4 @@ const Header = () => {
 };
 
 export default Header;
+

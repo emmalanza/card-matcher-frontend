@@ -1,6 +1,6 @@
 import Hero from '@components/ui/Hero';
+import InfoSection from '@components/ui/InfoSection';
 import SetsGrid from '@components/cards/SetsGrid';
-import InfoSection from '@components/cards/InfoSection';
 const  Home = () => {
     return (
         <>
