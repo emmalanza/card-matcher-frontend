@@ -67,7 +67,7 @@ const TradableCardsGrid = ({ onAddOrRemoveCard, currentCards }) => {
     return (
         <>
             <div className="w-full max-w-7xl px-10 py-4 flex flex-col justify-center items-center gap-2 md:gap-0 md:flex-row md:justify-between">
-                <h3 className="text-xl text-primary font-bold italic">Añade cartas a tu lista ✨</h3>
+                <h3 className="text-center sm:text-left text-xl text-primary font-bold italic">Añade cartas a tu lista ✨</h3>
                 <div className="flex flex-col sm:flex-row items-center gap-2">
                     <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder={"Buscar carta por nombre"} />
                     <Filter filter={filter} setFilter={setFilter} options={rarity} />

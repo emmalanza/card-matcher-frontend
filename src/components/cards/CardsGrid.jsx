@@ -79,7 +79,7 @@ function CardsGrid({setId, setName}) {
     >
       <div className="w-full max-w-7xl px-10 py-4
       flex flex-col justify-center items-center gap-2 md:gap-0 md:flex-row md:justify-between">
-        <h1 className="text-3xl text-primary font-bold italic">{setName}</h1>
+        <h1 className="text-center sm:text-left text-3xl text-primary font-bold italic">{setName}</h1>
         <div className="flex flex-col sm:flex-row items-center gap-2">
           <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} placeholder={"Buscar carta por nombre"} />
           <Filter filter={filter} setFilter={setFilter} options={rarity} labl/>

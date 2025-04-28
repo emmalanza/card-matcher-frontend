@@ -66,7 +66,6 @@ const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
                         {selectedList?.listType || 'Sin lista seleccionada'}
                     </h2>
 
-
                     <div className="flex items-center justify-between mt-10 mb-4">
                         <p id="modal-description" className="text-md text-gray-600">
                             Cantidad de cartas: {selectedList?.cards?.length || 0}
@@ -79,27 +78,30 @@ const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
                         </button>
                     </div>
 
-                    <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                        {selectedList?.cards.map(card => (
-                            <li
-                                key={card.id}
-                                className="bg-white border border-blue-100 rounded-xl shadow-sm p-4 flex items-center justify-between"
-                            >
-                                <div className="flex flex-col">
-                                    <span className="text-xs text-gray-500">#{card.id}</span>
-                                    <span className="text-base font-medium text-gray-800">{card.name}</span>
-                                </div>
-                                <button
-                                    onClick={() => handleAddOrRemoveCard(card.id, true)}
-                                    className="text-accent hover:scale-115 transition transform duration-150 ease-in-out"
-                                    aria-label={`Eliminar carta ${card.name}`}
+                    <div
+                        className="max-h-96 overflow-y-auto space-y-4"  // Aquí está la parte para hacer scrollable
+                    >
+                        <ul className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                            {selectedList?.cards.map(card => (
+                                <li
+                                    key={card.id}
+                                    className="bg-white border border-blue-100 rounded-xl shadow-sm p-4 flex items-center justify-between"
                                 >
-                                    <Trash2 size={18} />
-                                </button>
-
-                            </li>
-                        ))}
-                    </ul>
+                                    <div className="flex flex-col">
+                                        <span className="text-xs text-gray-500">#{card.id}</span>
+                                        <span className="text-base font-medium text-gray-800">{card.name}</span>
+                                    </div>
+                                    <button
+                                        onClick={() => handleAddOrRemoveCard(card.id, true)}
+                                        className="text-accent hover:scale-115 transition transform duration-150 ease-in-out"
+                                        aria-label={`Eliminar carta ${card.name}`}
+                                    >
+                                        <Trash2 size={18} />
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
 
                     {showGrid && (
                         <div className="mt-6 border-t pt-6">
