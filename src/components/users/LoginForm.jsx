@@ -41,7 +41,7 @@ const LoginForm = () => {
       if (result.error) {
         setError(result.error);  
       } else {
-        login(result.token);  
+        login(result.data);  
         navigate('/');
       }
     } catch (error) {

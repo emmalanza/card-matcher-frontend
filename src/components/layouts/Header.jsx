@@ -36,8 +36,9 @@ const Header = () => {
 
     return (
         <header
-            className={`${isSticky ? "fixed top-0" : "absolute top-0"} 
-            z-1 w-full px-10 py-6 backdrop-blur-none flex items-center justify-between`}
+            className={`${isSticky ? "fixed top-0 backdrop-blur-md" : "absolute top-0 backdrop-blur-none"} 
+            z-10 w-full px-10 py-6 transition-all ease-in-out duration-300
+            flex items-center justify-between`}
         >
             <Link to="/">
                 <img src={Logo} alt="logo" className="w-28 hover:scale-110 transition transform" />
@@ -91,12 +92,12 @@ const Header = () => {
                                 </Link>
                             </li>
                             <li>
-                                <Link to="profile" className="hover:underline">
+                                <Link className="opacity-50 pointer-events-none">
                                     Mi Colección
                                 </Link>
                             </li>
                             <li>
-                                <Link to="profile" className="hover:underline">
+                                <Link to="profile"  className="opacity-50 pointer-events-none">
                                     Haz Match!
                                 </Link>
                             </li>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, AtSign, Handshake } from 'lucide-react';
+import imgProfile  from "@assets/img/pokeball-icon.svg"; 
 
 const ProfileInfo = ({ user }) => {
 
@@ -12,9 +13,9 @@ const ProfileInfo = ({ user }) => {
             <div className="w-full max-w-lg mx-auto p-4 bg-white shadow-xl rounded-2xl mt-20 sm:p-6 md:p-8">
                 <div className="flex flex-col items-center space-y-4 text-center">
                     <img
-                        src={user.photoURL || '/default-avatar.png'}
+                        src={imgProfile}
                         alt="Foto de perfil"
-                        className="w-28 h-28 rounded-full object-cover shadow-md sm:w-32 sm:h-32"
+                        className="w-28 h-28 rounded-full object-cover sm:w-32 sm:h-32"
                     />
                     <p className="text-sm text-gray-500 sm:text-base">@{user.username}</p>
                 </div>

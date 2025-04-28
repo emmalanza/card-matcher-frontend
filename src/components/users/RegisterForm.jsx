@@ -49,17 +49,16 @@ const RegisterForm = () => {
 
   const handleRegister = async (data) => {
     try {
-      const result = await registerUser(data);
-      if (result.error) {
-        setError(result.error);
-      } else {
-        console.log("result", result);
-        navigate('/login');
-      }
+        const result = await registerUser(data);
+        if (result.error) {
+            setError(result.error);
+        } else {
+            navigate('/login');
+        }
     } catch (error) {
-      setError("Hubo un problema al registrarse. Por favor, inténtalo más tarde.");
+        setError("Hubo un problema al registrarse. Por favor, inténtalo más tarde.");
     }
-  };
+};
 
   return (
     <div className="bg-white p-4 sm:p-8 md:p-10 rounded-lg w-full md:w-2xl lg:w-4xl 

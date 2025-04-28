@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Dialog } from '@headlessui/react';
 import { Plus, Minus, Trash2, X } from 'lucide-react';
-import { getUserCardLists, addCardToList, removeCardFromList } from '@services/cardLists/cardListService';
+import { getUserCardLists } from '@services/users/userService';
+import { addCardToList, removeCardFromList } from '@services/cardLists/cardListService';
 import TradableCardsGrid from '@components/cards/TradableCardsGrid';
 
 const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
@@ -12,8 +13,10 @@ const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
         const token = localStorage.getItem('token');
         try {
             const data = await getUserCardLists(token);
+
             const updatedList = data.find(list => list.id === selectedList?.id);
-            setSelectedList(updatedList || selectedList);
+            setSelectedList(updatedList);
+
         } catch (error) {
             console.error('Error recargando listas:', error);
             alert('Hubo un error al actualizar la lista desde el servidor');
@@ -42,7 +45,7 @@ const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
     return (
         <Dialog open={isOpen} onClose={onClose} className="relative z-50">
             <div className="fixed inset-0 bg-black/30" aria-hidden="true" />
-            <div className="fixed inset-0 flex items-center justify-center p-4">
+            <div className="fixed inset-0 my-20 flex items-center justify-center p-4">
                 <div
                     className="bg-white rounded-2xl max-w-3xl w-full max-h-screen overflow-y-auto p-6 shadow-xl 
                     border border-blue-200 scrollbar-none relative"
@@ -80,7 +83,7 @@ const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
                         {selectedList?.cards.map(card => (
                             <li
                                 key={card.id}
-                                className="bg-white border border-blue-100 rounded-xl shadow-sm hover:shadow-md transition p-4 flex items-center justify-between"
+                                className="bg-white border border-blue-100 rounded-xl shadow-sm p-4 flex items-center justify-between"
                             >
                                 <div className="flex flex-col">
                                     <span className="text-xs text-gray-500">#{card.id}</span>
@@ -88,11 +91,12 @@ const CardListModal = ({ isOpen, onClose, initialSelectedList }) => {
                                 </div>
                                 <button
                                     onClick={() => handleAddOrRemoveCard(card.id, true)}
-                                    className="text-accent hover:translate-115 transition transform"
+                                    className="text-accent hover:scale-115 transition transform duration-150 ease-in-out"
                                     aria-label={`Eliminar carta ${card.name}`}
                                 >
                                     <Trash2 size={18} />
                                 </button>
+
                             </li>
                         ))}
                     </ul>

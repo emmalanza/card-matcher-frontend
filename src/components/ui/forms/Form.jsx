@@ -59,7 +59,7 @@ const Form = ({ fields, onSubmit, submitButtonText }) => {
 
           <button
             type="button"
-            className="flex items-center justify-center gap-2 w-full sm:w-1/2 border border-primary text-primary rounded-lg py-3 hover:bg-gray-100 transition duration-200"
+            className="flex items-center justify-center gap-2 w-full sm:w-1/2 border border-primary text-primary rounded-lg py-3 opacity-50 pointer-events-none"
           >
             <svg
               width="24"
