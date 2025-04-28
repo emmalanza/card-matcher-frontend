@@ -56,14 +56,14 @@ Card Matcher es una aplicación web para coleccionistas de cartas:
 ### Pasos
 
 ```bash
-# 1. Clonar repositorio
+ 1. Clonar repositorio
 git clone https://github.com/emmalanza/card-matcher-frontend.git
 cd card-matcher-frontend
 
-# 2. Instalar dependencias
-npm install
-# o con Yarn
-# yarn install
+ 2. Instalar dependencias
+ npm install
+ o con Yarn
+ yarn install
 
 
 :)
