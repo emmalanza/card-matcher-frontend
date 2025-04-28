@@ -1,11 +1,17 @@
+
+import React from 'react'
+import AppRouter from '@routes/AppRouter';
+import { AuthProvider }  from '@contexts/AuthContext';
+
+
 function App() {
- 
 
   return (
-    <>
-     <h1 className="text-red-700">Hello React + Tailwind </h1>
-    </>
-  )
-}
+    <AuthProvider>
+        <AppRouter />
+    </AuthProvider>
+  );
 
+};
+  
 export default App;
